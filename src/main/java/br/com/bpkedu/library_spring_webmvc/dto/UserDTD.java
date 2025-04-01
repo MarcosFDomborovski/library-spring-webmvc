@@ -1,28 +1,13 @@
-package br.com.bpkedu.library_spring_webmvc.domain;
+package br.com.bpkedu.library_spring_webmvc.dto;
 
+import br.com.bpkedu.library_spring_webmvc.domain.Usuario;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "usuarios")
-public class Usuario {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserDTD {
     private String nome;
     private String senha;
     private String email;
     private String endereco;
     private String celular;
-
-    public Usuario(String celular, String email, String endereco, String nome, String senha) {
-        this.celular = celular;
-        this.email = email;
-        this.endereco = endereco;
-        this.nome = nome;
-        this.senha = senha;
-    }
 
     public String getEmail() {
         return email;
@@ -38,14 +23,6 @@ public class Usuario {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -67,4 +44,14 @@ public class Usuario {
     public void setCelular(String celular) {this.celular = celular;}
 
     public String getCelular(){return celular;}
+
+    public Usuario toUser(UserDTD UserDtd){
+        return new Usuario (
+                this.nome,
+                this.senha,
+                this.email,
+                this.endereco,
+                this.celular
+        );
+    }
 }
